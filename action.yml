@@ -1,0 +1,14 @@
+name: 'Rhasspy Tag Bump'
+description: 'Bump and push git tag on version increment in VERSION file'
+author: 'Max Bachmann'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+outputs:
+  new_tag:
+    description: 'The new tag (only set when a new tag is added)'
+  current_version:
+    description: 'The latest version after after running this action'
+branding:
+  icon: 'git-merge'  
+  color: 'purple'

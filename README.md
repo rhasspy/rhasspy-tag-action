@@ -19,6 +19,10 @@ jobs:
       uses: rhasspy/rhasspy-tag-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      id: bump_tag
+    - name: update packages
+      if: steps.bump_tag.outputs.new_tag
+      run: <package-new-version-and-deploy>
 ```
 
 #### Options

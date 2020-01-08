@@ -1,6 +1,6 @@
 FROM alpine
-LABEL "repository"="https://github.com/maxbachmann/rhasspy-tag-action"
-LABEL "homepage"="https://github.com/maxbachmann/rhasspy-tag-action"
+LABEL "repository"="https://github.com/rhasspy/rhasspy-tag-action"
+LABEL "homepage"="https://github.com/rhasspy/rhasspy-tag-action"
 LABEL "maintainer"="Max Bachmann"
 
 COPY entrypoint.sh /entrypoint.sh

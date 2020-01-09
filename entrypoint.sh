@@ -50,6 +50,6 @@ curl -s -X POST $git_refs_url \
 EOF
 
 else
-    echo "No new commits since previous tag. Skipping..."
+    echo "The Version number in VERSION was not increased. Skipping..."
     echo ::set-output name=current_version::$version
 fi

@@ -11,22 +11,36 @@ then
     version='0.0.0'
 else
     tag=$(git describe --tags $tagSha)
-	version="${tag:1}"
+	version_string="${tag:1}"
+    IFS='-' read -r version release_type <<< "$version_string"
+    if [ -z "$release_type" ]
+    then
+        release_type='release'
+    fi
 fi
 
 
 # get current commit hash for tag
 commit=$(git rev-parse HEAD)
-new_version=$(head -1 VERSION)
+new_version_string=$(head -1 VERSION)
 
-
-if [[ $new_version > $version ]]
+# split version_string into version and dev/
+IFS='-' read -r new_version new_release_type <<< "$new_version_string"
+if [ -z "$new_release_type" ]
 then
-new_tag="v$new_version"
+    new_release_type='release'
+    new_tag="v$new_version"
+else
+    new_tag="v$new_version-$new_release_type"
+fi
 
+
+if [[ $new_version > $version || $new_version == $version && $new_release_type > $release_type ]]
+then
 # set outputs
 echo ::set-output name=new_tag::$new_tag
-echo ::set-output name=current_version::$version
+echo ::set-output name=current_version::$new_version
+echo ::set-output name=current_release_type::$new_release_type
 
 # get repo name from git
 remote=$(git config --get remote.origin.url)
@@ -52,4 +66,5 @@ EOF
 else
     echo "The Version number in VERSION was not increased. Skipping..."
     echo ::set-output name=current_version::$version
+    echo ::set-output name=current_release_type::$release_type
 fi

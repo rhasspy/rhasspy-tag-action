@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# fetch tags
-git fetch --tags
-
 # get latest tag
 git fetch --tags
 tagSha=$(git rev-list --tags --max-count=1)

@@ -33,15 +33,15 @@ if new_version > version:
 
     git_refs_url = github_event_json['repository']['git_refs_url'].strip('"').rstrip('{/sha}')
 
-    print(f'{timestampStr}: **pushing tag v{new_version} to repo {full_name}'
+    print(f'{timestampStr}: **pushing tag v{new_version} to repo {full_name}')
 
     requests.post(
         git_refs_url,
         data={
             "ref": f"refs/tags/v{new_version}",
             "sha": commit
-        }
-        headers={'Authorization': f'token {os.environ['GITHUB_TOKEN']}'}
+        },
+        headers={'Authorization': f'token {os.environ["GITHUB_TOKEN"]}'}
     )
 else:
     print('The Version number in VERSION was not increased. Skipping...')

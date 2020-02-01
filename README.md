@@ -35,7 +35,6 @@ jobs:
 outputs:
 - **new_tag** - The new tag (only set when a new tag is added)
 - **current_version** - The latest version after running this action
-- **current_release_type** - release type of latest version returns either dev or release
 
 > ***Note:*** This action creates a [lightweight tag](https://developer.github.com/v3/git/refs/#create-a-reference).
 

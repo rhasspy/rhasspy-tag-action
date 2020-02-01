@@ -20,6 +20,7 @@ with open('VERSION') as f:
 new_version = Version.fromString(new_version_string)
 
 if new_version > version:
+    print('v1')
     print(f'::set-output name=new_tag::v{new_version}')
     print(f'::set-output name=current_version::{new_version}')
 
@@ -43,7 +44,7 @@ if new_version > version:
         },
         headers={'Authorization': f'token {os.environ["GITHUB_TOKEN"]}'}
     )
-    print(result, git_refs_url, commit, f"refs/tags/v{new_version}", len(os.environ["GITHUB_TOKEN"]))
+    print(f"refs/tags/v{new_version}", git_refs_url, commit, result)
 else:
     print('The Version number in VERSION was not increased. Skipping...')
     print(f'::set-output name=current_version::{version}')

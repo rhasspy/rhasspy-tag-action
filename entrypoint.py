@@ -35,7 +35,7 @@ if new_version > version:
 
     print(f'{timestampStr}: **pushing tag v{new_version} to repo {full_name}')
 
-    requests.post(
+    result = requests.post(
         git_refs_url,
         data={
             "ref": f"refs/tags/v{new_version}",
@@ -43,6 +43,7 @@ if new_version > version:
         },
         headers={'Authorization': f'token {os.environ["GITHUB_TOKEN"]}'}
     )
+    print(result)
 else:
     print('The Version number in VERSION was not increased. Skipping...')
     print(f'::set-output name=current_version::{version}')

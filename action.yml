@@ -9,8 +9,6 @@ outputs:
     description: 'The new tag (only set when a new tag is added)'
   current_version:
     description: 'The latest version after after running this action'
-  release_type:
-    description: 'release type of latest version returns either dev or release'
 branding:
   icon: 'git-merge'  
   color: 'purple'

@@ -1,10 +1,11 @@
-FROM alpine
+FROM python:slim-buster
 LABEL "repository"="https://github.com/rhasspy/rhasspy-tag-action"
 LABEL "homepage"="https://github.com/rhasspy/rhasspy-tag-action"
 LABEL "maintainer"="Max Bachmann"
 
-COPY entrypoint.sh /entrypoint.sh
+COPY entrypoint.py /entrypoint.py
+COPY Version.py /Version.py
 
-RUN apk update && apk add bash git curl jq
+RUN pip3 install requests
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["python3 /entrypoint.py"]

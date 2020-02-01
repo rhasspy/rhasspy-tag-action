@@ -20,7 +20,6 @@ with open('VERSION') as f:
 new_version = Version.fromString(new_version_string)
 
 if new_version > version:
-    print('v1')
     print(f'::set-output name=new_tag::v{new_version}')
     print(f'::set-output name=current_version::{new_version}')
 
@@ -32,7 +31,7 @@ if new_version > version:
     with open(os.environ['GITHUB_EVENT_PATH']) as f:
         github_event_json = json.load(f)
 
-    git_refs_url = github_event_json['repository']['git_refs_url'].strip('"').rstrip('{/sha}')
+    git_refs_url = github_event_json['repository']['git_refs_url'].strip('"').replace('{/sha}', '')
 
     print(f'{timestampStr}: **pushing tag v{new_version} to repo {full_name}')
 
@@ -44,7 +43,6 @@ if new_version > version:
         },
         headers={'Authorization': f'token {os.environ["GITHUB_TOKEN"]}'}
     )
-    print(f"refs/tags/v{new_version}", git_refs_url, commit, result)
 else:
     print('The Version number in VERSION was not increased. Skipping...')
     print(f'::set-output name=current_version::{version}')

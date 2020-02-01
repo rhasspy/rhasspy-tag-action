@@ -8,4 +8,4 @@ COPY Version.py /Version.py
 
 RUN pip3 install requests
 
-ENTRYPOINT ["python3 /entrypoint.py"]
+CMD [ "python3", "/entrypoint.py" ]

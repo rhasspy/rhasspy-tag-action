@@ -37,7 +37,7 @@ if new_version > version:
 
     result = requests.post(
         git_refs_url,
-        data={
+        json={
             "ref": f"refs/tags/v{new_version}",
             "sha": commit
         },

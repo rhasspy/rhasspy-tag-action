@@ -19,6 +19,9 @@ with open('VERSION') as f:
 
 new_version = Version.fromString(new_version_string)
 
+print(f'current version: {version}')
+print(f'commit version: {new_version}')
+
 if new_version > version:
     print(f'::set-output name=new_tag::v{new_version}')
     print(f'::set-output name=current_version::{new_version}')

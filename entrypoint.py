@@ -8,6 +8,7 @@ import requests
 
 subprocess.run(['git', 'fetch', '--tags'])
 results = subprocess.run(['git', 'describe', '--tags'], capture_output=True).stdout.split(maxsplit=1)
+print(results)
 tag = results[0].decode() if results else ''
 version = Version.fromString(tag)
 

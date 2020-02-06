@@ -7,10 +7,9 @@ import json
 import requests
 
 subprocess.run(['git', 'fetch', '--depth=1', 'origin', '+refs/tags/*:refs/tags/*'])
-results = subprocess.run(['git', 'describe', '--tags'], capture_output=True).stdout.split(maxsplit=1)
-print(results)
-tag = results[0].decode() if results else ''
-version = Version.fromString(tag)
+results = subprocess.run(['git', 'tag'], capture_output=True).stdout.decode().split()
+
+version = max(Version.fromString(tag) for tag in results) if results else Version.fromString('')
 
 # get current commit hash for tag
 commit = subprocess.run(['git', 'rev-parse', 'HEAD'], capture_output=True).stdout.decode().strip()

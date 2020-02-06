@@ -6,7 +6,7 @@ import os
 import json
 import requests
 
-subprocess.run(['git', 'fetch', '--tags'])
+subprocess.run(['git', 'fetch', '--no-tags', '--prune', '--depth=1', 'origin', '+refs/heads/*:refs/remotes/origin/*'])
 results = subprocess.run(['git', 'describe', '--tags'], capture_output=True).stdout.split(maxsplit=1)
 print(results)
 tag = results[0].decode() if results else ''
